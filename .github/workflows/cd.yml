@@ -12,7 +12,7 @@ jobs:
       - name: Clone repository
         uses: actions/checkout@v7
 
-      - name: Use SSH key
+      - name: Use SSh key
         run: | 
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
