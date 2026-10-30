@@ -12,6 +12,16 @@ jobs:
       - name: Clone repository
         uses: actions/checkout@v7
 
+      - name: Use SSH key
+        run: | 
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          sudo chmod 600 ~/.ssh/id_rsa
+
+      - name: Git config
+        run: |
+          git config --global user.name "cd-user@my-app.com"
+          git config --global user.email "cd-user"
       - name: Install
         run: npm install
 
@@ -19,4 +29,4 @@ jobs:
         run: npm run build
       
       - name: Deploy
-        run: npm run deploy
+        run: npm run deploy -- -r git@github.com:MiguelAlacid/laboratorio-cloud-gh-pages-automatico.git
